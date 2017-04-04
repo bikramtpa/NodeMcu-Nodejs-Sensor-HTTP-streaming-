@@ -1,9 +1,9 @@
 #include <ESP8266WiFi.h>
 
-const char* ssid     = "dlink"; // YOUR_WIFI_NAME
-const char* password = "tampere11";
+const char* ssid     = "xxxx"; // YOUR_WIFI_NAME
+const char* password = "xxxxxx";
 String pubString;
-const char* host     = "192.168.0.108"; // Ip of server where data has to be sent
+const char* host     = "xxx.xxx.xx.xxx"; // Ip of server where data has to be sent
 float sensor1Value   = 0;
 float sensor2Value   = 0 ;
 float sensor3Value   = 0 ;
