@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sensor Readings</title>
+	<script src="//d3js.org/d3.v3.min.js"></script>
+	<style>
+		#svg-wrapper {
+			width: 500px;
+			height: 160px;
+			margin: 2em auto;
+		}
+		svg path {
+			fill: none;
+			stroke: #000;
+			stroke-width: 1.5px;
+		}
+		svg .axis {
+			font-size: 12px;
+		}
+		svg .axis path {
+			display: none;
+		}
+		/* heart div class - in html i used just a simple html simbol entity for heart sign, you can use text or whatever u want*/
+		.heart {
+			width:40px;
+			float: left;
+			font-size: 40px;
+			color: #e00;
+			animation: beat .60s infinite alternate;
+			transform-origin: center;
+		}
+
+		/* Heart beat animation */
+		@keyframes beat{
+			to { transform: scale(1.4); }
+		}
+		#sensorValues{
+			padding-top: 15px;
+		}
+		#sensor1, #sensor2, #sensor3{
+			padding:20px;
+		}
+	</style>
+	<script src="http://192.168.0.108:3000/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+	var socket = io.connect('http://192.168.0.108:3000');
+	socket.on('transmit', function (data) {
+		//console.log(data);
+		document.getElementById('sensor1Value').innerHTML = "Sensor 1 Value: " + data.msg.sensor1Val;
+		document.getElementById('sensor2Value').innerHTML = "Sensor 2 Value: " + data.msg.sensor2Val;
+		document.getElementById('sensor3Value').innerHTML = "Sensor 3 Value: " + data.msg.sensor3Val;
+		//BEAT_VALUES.push(data.msg);
+		//removeHeartBeat();
+		//drawHeartBeat();
+		socket.emit('my other event', { my: 'data' });
+	});
+	</script>
+<body>
+	<div class="heart" style="display:none">&#x2665;</div>
+	<!--<div id="svg-wrapper"></div>-->
+	<div id="sensorValues">
+		<div id="sensor1Value"></div>
+		<div id="sensor2Value"></div>
+		<div id="sensor3Value"></div>
+	</div>
+</body>
+</html>		
